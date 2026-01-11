@@ -1,0 +1,22 @@
+.categories {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+}
+
+.category-card {
+  text-align: center;
+  cursor: pointer;
+}
+.title{
+text-align: center;
+}
+
+:host ::ng-deep .p-carousel-item {
+  display: flex;
+}
+
+.category-card {
+  cursor: pointer;
+  text-align: center;
+}

@@ -1,0 +1,64 @@
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f8fafc, #eef2ff);
+  padding: 1rem;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 380px;
+  border-radius: 14px;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+  border: none;
+}
+
+/* FORM */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* FIELD */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* LABEL */
+label {
+  font-size: 0.8rem;
+  color: #475569;
+  font-weight: 500;
+  pointer-events: none !important;
+}
+
+/* INPUTS */
+.p-inputtext,
+.p-password,
+.p-password-input {
+  width: 100%;
+  border-radius: 10px;
+  pointer-events: auto;
+  position: relative;
+  z-index: 2;
+}
+
+/* PASSWORD WRAPPER */
+.p-password {
+  display: block;
+}
+
+/* BUTTON */
+.login-btn {
+  margin-top: 0.5rem;
+  border-radius: 10px;
+  height: 42px;
+  font-weight: 500;
+}

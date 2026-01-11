@@ -1,0 +1,153 @@
+
+ <div class="home-container">
+
+<h1 class="title">STORE EXAMPLE</h1>
+
+<p class="description">Bienvenido a nuestra tienda, donde la calidad y la innovación se encuentran. Descubre una amplia variedad de productos cuidadosamente seleccionados para satisfacer tus necesidades diarias. Compra de forma segura, rápida y sencilla, y disfruta de una experiencia pensada para ti.</p>
+
+
+  
+ <div class="categories">
+  <p-card
+    *ngFor="let cat of category()"
+    class="category-card"
+    (click)="goToCategory(cat.categoryid)"
+  >
+    <h3>{{ cat.categoryname }}</h3>
+  </p-card>
+</div>
+
+
+<h2 class="subtitle">Productos Recomendados</h2>
+<p-carousel
+  *ngIf="productos().length > 0"
+  [value]="productos()"
+  [numVisible]="4"
+  [numScroll]="1"
+  [responsiveOptions]="responsiveOptions"
+  [circular]="false"
+  [showIndicators]="false"
+>
+  <ng-template let-product pTemplate="item">
+    <div class="p-2 h-full">
+      <div class="border border-surface rounded-border p-4 h-full flex flex-column">
+
+        <!-- Imagen -->
+        <div class="mb-4">
+          <div class="relative mx-auto">
+            <img
+              [src]="product.imagenes?.[0]?.url || 'assets/img/products/imagendefault.png'"
+              (error)="onImageError($event)"
+              [alt]="product.productname"
+              class="w-full rounded-border"
+            />
+
+            <!-- Ranking -->
+            <p-tag
+              [value]="'Rank #' + product.ranked"
+              severity="info"
+              class="absolute"
+              [ngStyle]="{ left: '5px', top: '5px' }"
+            />
+          </div>
+        </div>
+
+        <!-- Nombre -->
+        <div class="mb-2 font-medium">
+          {{ product.productname }}
+        </div>
+
+        <!-- Descripción -->
+        <div class="text-sm text-color-secondary mb-3">
+          {{ product.productdescription }}
+        </div>
+
+        <!-- Ventas -->
+        <div class="flex justify-between items-center mt-auto">
+          <div class="font-semibold text-sm">
+            🔥 {{ product.numveces }} ventas
+          </div>
+
+          <span>
+            <p-button
+              icon="pi pi-heart"
+              severity="secondary"
+              [outlined]="true"
+            />
+            <p-button
+              icon="pi pi-shopping-cart"
+              styleClass="ml-2"
+            />
+          </span>
+        </div>
+
+      </div>
+    </div>
+  </ng-template>
+</p-carousel>
+
+// lista 
+<div
+  class="product-grid"
+  *ngIf="productospublic().length > 0"
+>
+  <div
+    class="product-card"
+    *ngFor="let product of productospublic()"
+  >
+    <div class="card-inner">
+
+      <!-- Imagen -->
+      <div class="image-wrapper">
+        <img
+          [src]="product.imagenes?.[0]?.url || 'assets/img/products/imagendefault.png'"
+          (error)="onImageError($event)"
+          [alt]="product.productname"
+        />
+
+        <!-- Ranking -->
+        <p-tag
+          [value]="'Rank #' + product.ranked"
+          severity="info"
+          class="rank-tag"
+        />
+      </div>
+
+      <!-- Nombre -->
+      <div class="product-name">
+        {{ product.productname }}
+      </div>
+
+      <!-- Descripción -->
+      <div class="product-description">
+        {{ product.productdescription }}
+      </div>
+
+      <!-- Footer -->
+      <div class="product-footer">
+        <span class="sales">
+          🔥 {{ product.numveces }} ventas
+        </span>
+
+        <span class="actions">
+          <p-button
+            icon="pi pi-heart"
+            severity="secondary"
+            [outlined]="true"
+            size="small"
+          />
+          <p-button
+            icon="pi pi-shopping-cart"
+            size="small"
+            styleClass="ml-2"
+          />
+        </span>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+</div>

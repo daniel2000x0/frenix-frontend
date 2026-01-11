@@ -1,0 +1,48 @@
+<div class="contact-container">
+  <p-card class="contact-card">
+    <ng-template pTemplate="header">
+      <div class="contact-header">
+        <i class="pi pi-envelope"></i>
+        <span>Contacto</span>
+      </div>
+    </ng-template>
+
+    <div class="p-fluid">
+      <div class="field">
+        <label>Nombre</label>
+        <input
+          pInputText
+          [(ngModel)]="name"
+          placeholder="Tu nombre"
+        />
+      </div>
+
+      <div class="field">
+        <label>Email</label>
+        <input
+          pInputText
+          type="email"
+          [(ngModel)]="email"
+          placeholder="correo@ejemplo.com"
+        />
+      </div>
+
+      <div class="field">
+        <label>Mensaje</label>
+        <textarea
+          pInputTextarea
+          [(ngModel)]="message"
+          rows="4"
+          placeholder="Escribe tu mensaje..."
+        ></textarea>
+      </div>
+
+      <button
+        pButton
+        label="Enviar mensaje"
+        icon="pi pi-send"
+        class="mt-3 w-full"
+      ></button>
+    </div>
+  </p-card>
+</div>

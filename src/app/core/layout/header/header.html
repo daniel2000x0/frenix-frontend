@@ -1,0 +1,33 @@
+<p-menubar [model]="items">
+
+  <ng-template pTemplate="start">
+    <a routerLink="/" class="logo">MyStore</a>
+  </ng-template>
+
+  <ng-template pTemplate="end">
+    <button
+      pButton
+      type="button"
+      icon="pi pi-user"
+      class="p-button-rounded p-button-text">
+    </button>
+
+    <button
+      pButton
+      type="button"
+      icon="pi pi-shopping-cart"
+      class="p-button-rounded p-button-text">
+    </button>
+
+    <p-avatar
+      image="../../../assets/profile.png"
+      shape="circle"
+      size="large"
+      styleClass="cursor-pointer"
+      (click)="menu.toggle($event)">
+    </p-avatar>
+
+    <p-menu #menu [popup]="true" [model]="item"></p-menu>
+  </ng-template>
+
+</p-menubar>

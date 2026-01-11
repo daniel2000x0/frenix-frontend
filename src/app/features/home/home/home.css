@@ -1,0 +1,193 @@
+.home-container{
+  width: 100%;
+    max-width: 90%;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+
+.description {
+  margin: 2.1rem auto;
+  font-size: 1.4rem; /* mejor legibilidad en párrafos */
+  max-width: 60%;
+  text-align: center;
+  line-height: 1.6;
+  color: var(--text-secondary, #0a0a0a);
+ 
+}
+.title{
+  font-weight: 6 rem;
+   text-align: center;
+  font-size: 2.5rem;
+  color: var(--text-color-secondary, #111827);
+}
+.categories {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+}
+
+.category-card {
+  text-align: center;
+  cursor: pointer;
+}
+
+.icon {
+  font-size: 2rem;
+}
+
+
+/* Contenedor general de DataView */
+p-dataview .grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem; /* Espacio entre productos */
+}
+
+/* Tarjeta de producto */
+p-dataview .grid > div {
+  background-color: var(--surface-card, #fff);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Efecto hover */
+p-dataview .grid > div:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Imagen de producto */
+p-dataview img {
+  width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  object-fit: cover;
+}
+
+/* Información del producto */
+p-dataview .text-lg {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-top: 0.5rem;
+}
+
+p-dataview .font-medium {
+  font-weight: 500;
+}
+
+/* Precio */
+p-dataview .text-xl {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+/* Botones */
+p-dataview p-button {
+  margin-top: 0.25rem;
+}
+
+.subtitle{
+  font-size:1.5rem;
+  font-weight:600;
+  margin-bottom:1rem;
+  color: var(--text-color-secondary, #111827);
+}
+/* Rating */
+p-dataview .pi-star-fill {
+  color: #facc15; /* amarillo */
+}
+
+/* Tag de inventario */
+p-dataview p-tag {
+  font-weight: 500;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+}
+
+/* Responsive: columnas en móviles */
+@media (max-width: 640px) {
+  p-dataview .grid {
+    grid-template-columns: 1fr; /* Una columna en móviles */
+  }
+}
+
+
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.product-card {
+  height: 100%;
+}
+
+.card-inner {
+  border: 1px solid var(--surface-border);
+  border-radius: 12px;
+  padding: 1rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-card);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-inner:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Imagen */
+.image-wrapper {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.image-wrapper img {
+  width: 100%;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.rank-tag {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+}
+
+/* Texto */
+.product-name {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.product-description {
+  font-size: 0.875rem;
+  color: var(--text-color-secondary);
+  margin-bottom: 1rem;
+}
+
+/* Footer */
+.product-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+}
+
+.sales {
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+}

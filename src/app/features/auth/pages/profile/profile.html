@@ -1,0 +1,24 @@
+<p-card class="profile-card">
+  <div class="profile-header">
+    <p-avatar
+      image="assets/profile.png"
+      size="xlarge"
+      shape="circle">
+    </p-avatar>
+
+    <h2>{{ user.name }}</h2>
+    <p class="email">{{ user.email }}</p>
+  </div>
+
+  <div class="actions">
+    <button pButton label="Editar perfil" icon="pi pi-user-edit"></button>
+    <button
+      pButton
+      label="Cerrar sesión"
+      icon="pi pi-sign-out"
+      severity="danger"
+      (click)="logout()">
+    </button>
+  </div>
+</p-card>
+

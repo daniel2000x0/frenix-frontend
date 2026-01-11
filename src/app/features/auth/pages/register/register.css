@@ -1,0 +1,76 @@
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f8fafc, #eef2ff);
+  padding: 1rem;
+}
+
+/* CARD */
+.login-card {
+  width: 100%;
+  max-width: 380px;
+  border-radius: 14px;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+  border: none;
+  overflow: visible; /* CLAVE */
+}
+
+/* FORM */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* FIELD */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+/* LABEL */
+label {
+  font-size: 0.8rem;
+  color: #475569;
+  font-weight: 500;
+}
+
+/* INPUTS */
+.p-inputtext,
+.p-password,
+.p-password-input {
+  width: 100%;
+  border-radius: 10px;
+}
+
+/* PASSWORD */
+.p-password {
+  display: block;
+}
+
+/* BUTTON (ANTI BLOQUEO) */
+.login-btn {
+  margin-top: 0.5rem;
+  border-radius: 10px;
+  height: 42px;
+  font-weight: 500;
+  position: relative;
+  z-index: 10;
+  pointer-events: auto;
+}
+
+/* ERROR */
+.error {
+  font-size: 0.75rem;
+  color: #ef4444;
+}
+
+/* 🔥 PRIME NG OVERLAY FIX (CRÍTICO) */
+.p-component-overlay {
+  pointer-events: none !important;
+}

@@ -1,0 +1,64 @@
+.contact-container {
+  min-height: calc(100vh - 120px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Card */
+.contact-card {
+  width: 100%;
+  max-width: 520px;
+  border-radius: 14px;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.15);
+}
+
+/* Header */
+.contact-header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+/* Field wrapper */
+.field {
+  position: relative;
+  margin-bottom: 1.4rem;
+}
+
+/* Evita overlays de PrimeNG */
+.field::before,
+.field::after {
+  content: none !important;
+}
+
+/* Labels */
+.field label {
+  font-weight: 500;
+  margin-bottom: 0.4rem;
+  display: block;
+  color: #444;
+}
+
+/* Inputs */
+.field input,
+.field textarea {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Neutraliza pseudo-elementos en inputs PrimeNG */
+.field input::before,
+.field input::after,
+.field textarea::before,
+.field textarea::after {
+  content: none !important;
+}
+
+/* Button */
+button {
+  font-weight: 600;
+}

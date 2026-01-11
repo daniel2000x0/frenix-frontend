@@ -1,0 +1,58 @@
+<div class="login-container">
+  <p-card header="Iniciar sesión" styleClass="login-card">
+
+    <form
+      [formGroup]="logInForm"
+      (ngSubmit)="logins()"
+      autocomplete="off"
+      novalidate
+      class="login-form"
+    >
+
+      <!-- EMAIL -->
+      <div class="field">
+        <label for="email">Correo electrónico</label>
+
+        <input
+          id="email"
+          type="email"
+          pInputText
+          formControlName="email"
+        />
+        <p>
+  disabled: {{ logInForm.get('email')?.disabled }}
+</p>
+        <small class="error" *ngIf="logInForm.get('email')?.touched && logInForm.get('email')?.invalid">
+          Email inválido
+        </small>
+      </div>
+
+      <!-- PASSWORD -->
+      <div class="field">
+        <label for="password">Contraseña</label>
+        <p-password
+          id="password"
+          formControlName="password"
+          [toggleMask]="true"
+          [feedback]="false"
+        ></p-password>
+        <small class="error" *ngIf="logInForm.get('password')?.touched && logInForm.get('password')?.invalid">
+          Contraseña requerida
+        </small>
+      </div>
+
+      <!-- BOTÓN -->
+      <button
+        pButton
+        type="submit"
+        label="Iniciar sesión"
+        icon="pi pi-sign-in"
+        class="login-btn"
+        [loading]="loading"
+        [disabled]="logInForm.invalid || loading"
+      ></button>
+
+    </form>
+
+  </p-card>
+</div>

@@ -1,0 +1,28 @@
+<div class="unauthorized-wrapper">
+  <p-card header="403 - Acceso denegado" subheader="Permisos insuficientes">
+    <p>
+      No tienes autorización para acceder a esta sección.
+      Si crees que es un error, contacta al administrador.
+    </p>
+
+    <ng-template pTemplate="footer">
+      <div class="buttons">
+        <button
+          pButton
+          label="Ir al inicio"
+          icon="pi pi-home"
+          class="p-button-secondary"
+          (click)="goHome()"
+        ></button>
+
+        <button
+          pButton
+          label="Iniciar sesión"
+          icon="pi pi-sign-in"
+          class="p-button-primary"
+          (click)="goLogin()"
+        ></button>
+      </div>
+    </ng-template>
+  </p-card>
+</div>

@@ -1,1 +1,13 @@
-<p>payment-method works!</p>
+<div class="p-4 flex justify-content-center">
+  <p-card header="Seleccionar Método de Pago" styleClass="w-full md:w-6">
+    <div class="flex flex-column align-items-center gap-4">
+      <p-selectbutton
+        [options]="paymentOptions"
+        [(ngModel)]="selectedMethod"
+        optionLabel="label"
+        optionValue="value"
+      />
+      <p-button label="Continuar" icon="pi pi-arrow-right" iconPos="right" (onClick)="proceed()"></p-button>
+    </div>
+  </p-card>
+</div>

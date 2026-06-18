@@ -3,9 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { OrdenRoutingModule } from './orden-routing-module';
 
-
 @NgModule({
-  declarations: [],
   imports: [
     CommonModule,
     OrdenRoutingModule

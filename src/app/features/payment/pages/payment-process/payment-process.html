@@ -1,1 +1,9 @@
-<p>payment-process works!</p>
+<div class="p-4 flex justify-content-center">
+  <p-card header="Procesando Pago" styleClass="w-full md:w-6">
+    <div class="flex flex-column align-items-center gap-4 py-5">
+      <p-progressSpinner />
+      <p class="text-lg">Procesando su pago con {{ method }}...</p>
+      <p class="text-sm text-color-secondary">Por favor espere, no cierre esta ventana.</p>
+    </div>
+  </p-card>
+</div>

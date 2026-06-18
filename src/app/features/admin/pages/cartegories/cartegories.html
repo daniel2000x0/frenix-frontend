@@ -1,1 +1,52 @@
-<p>cartegories works!</p>
+<div class="p-4">
+  <div class="flex justify-content-between align-items-center mb-3">
+    <h1 class="text-3xl font-bold m-0">Categorías</h1>
+    <button pButton label="Nueva" icon="pi pi-plus" (click)="openNew()"></button>
+  </div>
+
+  <p-card>
+    <p-table [value]="categories" [paginator]="true" [rows]="10" styleClass="p-datatable-sm">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Tipo</th>
+          <th style="width: 120px">Acciones</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-category>
+        <tr>
+          <td>{{ category.categoryid }}</td>
+          <td>{{ category.categoryname }}</td>
+          <td>{{ category.categorykind }}</td>
+          <td>
+            <button pButton icon="pi pi-pencil" class="p-button-rounded p-button-text" (click)="editCategory(category)"></button>
+            <button pButton icon="pi pi-trash" class="p-button-rounded p-button-text p-button-danger" (click)="deleteCategory(category)"></button>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="4" class="text-center">No hay categorías registradas</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </p-card>
+
+  <p-dialog [(visible)]="categoryDialog" [style]="{ width: '450px' }" [header]="editMode ? 'Editar Categoría' : 'Nueva Categoría'" [modal]="true" (onHide)="hideDialog()">
+    <div class="flex flex-column gap-3">
+      <div class="field">
+        <label for="categoryname">Nombre</label>
+        <input id="categoryname" pInputText [(ngModel)]="selectedCategory.categoryname" class="w-full" />
+      </div>
+      <div class="field">
+        <label for="categorykind">Tipo</label>
+        <p-inputNumber id="categorykind" [(ngModel)]="selectedCategory.categorykind" [min]="0" class="w-full" />
+      </div>
+    </div>
+    <ng-template pTemplate="footer">
+      <button pButton label="Cancelar" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+      <button pButton label="Guardar" icon="pi pi-check" (click)="saveCategory()"></button>
+    </ng-template>
+  </p-dialog>
+</div>

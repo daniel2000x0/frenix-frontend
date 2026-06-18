@@ -1,7 +1,7 @@
-export interface CreateUserDto {
-  userfirstname: string;
-  userlastname: string;
-  useremail: string;
-  userpassword: string;
-  usergender: number;
+export interface CreatePaymentDto {
+  orderid: number;
+  amount: number;
+  currency: string;
+  provider: string;
+  payment_method: string;
 }

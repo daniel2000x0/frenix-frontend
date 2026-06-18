@@ -1,25 +1,21 @@
 <p-menubar [model]="items">
 
   <ng-template pTemplate="start">
-    <a routerLink="/" class="logo">MyStore</a>
+    <a routerLink="/" class="logo">FenixStore</a>
   </ng-template>
 
   <ng-template pTemplate="end">
     <button
       pButton
       type="button"
-      icon="pi pi-user"
-      class="p-button-rounded p-button-text">
-    </button>
-
-    <button
-      pButton
-      type="button"
       icon="pi pi-shopping-cart"
-      class="p-button-rounded p-button-text">
+      class="p-button-rounded p-button-text mr-2"
+      (click)="goCart()">
+      <span *ngIf="cartCount > 0" class="cart-badge">{{ cartCount }}</span>
     </button>
 
     <p-avatar
+      *ngIf="isAuthenticated"
       image="../../../assets/profile.png"
       shape="circle"
       size="large"
@@ -27,7 +23,14 @@
       (click)="menu.toggle($event)">
     </p-avatar>
 
-    <p-menu #menu [popup]="true" [model]="item"></p-menu>
+    <p-button
+      *ngIf="isAuthenticated"
+      icon="pi pi-user"
+      styleClass="p-button-rounded p-button-text mr-1"
+      (onClick)="menu.toggle($event)">
+    </p-button>
+
+    <p-menu #menu [popup]="true" [model]="isAuthenticated ? userMenuItems : authMenuItems"></p-menu>
   </ng-template>
 
 </p-menubar>

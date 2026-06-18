@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { Products } from './products';
+import { MessageService, ConfirmationService } from 'primeng/api';
+import { provideHttpClient } from '@angular/common/http';
 
 describe('Products', () => {
   let component: Products;
@@ -8,7 +9,8 @@ describe('Products', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Products]
+      imports: [Products],
+      providers: [MessageService, ConfirmationService, provideHttpClient()]
     })
     .compileComponents();
 

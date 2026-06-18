@@ -1,12 +1,15 @@
 import { Component } from '@angular/core';
+import { CardModule } from 'primeng/card';
 
 @Component({
   selector: 'app-user',
-  imports: [],
+  imports: [CardModule],
   template: `
-    <p>
-      user works!
-    </p>
+    <p-card header="User Management">
+      <p class="m-0">
+        Manage users and their roles here.
+      </p>
+    </p-card>
   `,
   styles: ``,
 })

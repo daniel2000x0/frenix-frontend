@@ -9,40 +9,51 @@
 
     <div class="p-fluid">
       <div class="field">
-        <label>Nombre</label>
+        <label for="name">Nombre</label>
         <input
+          id="name"
           pInputText
           [(ngModel)]="name"
           placeholder="Tu nombre"
+          [ngClass]="{ 'ng-invalid ng-dirty': submitted && !name }"
         />
+        <small *ngIf="submitted && !name" class="p-error">El nombre es requerido.</small>
       </div>
 
       <div class="field">
-        <label>Email</label>
+        <label for="email">Email</label>
         <input
+          id="email"
           pInputText
           type="email"
           [(ngModel)]="email"
           placeholder="correo@ejemplo.com"
+          [ngClass]="{ 'ng-invalid ng-dirty': submitted && !email }"
         />
+        <small *ngIf="submitted && !email" class="p-error">El email es requerido.</small>
       </div>
 
       <div class="field">
-        <label>Mensaje</label>
+        <label for="message">Mensaje</label>
         <textarea
+          id="message"
           pInputTextarea
           [(ngModel)]="message"
           rows="4"
           placeholder="Escribe tu mensaje..."
+          [ngClass]="{ 'ng-invalid ng-dirty': submitted && !message }"
         ></textarea>
+        <small *ngIf="submitted && !message" class="p-error">El mensaje es requerido.</small>
       </div>
 
-      <button
-        pButton
+      <p-button
         label="Enviar mensaje"
         icon="pi pi-send"
-        class="mt-3 w-full"
-      ></button>
+        [loading]="loading"
+        [disabled]="loading"
+        styleClass="mt-3 w-full"
+        (onClick)="onSubmit()"
+      ></p-button>
     </div>
   </p-card>
 </div>

@@ -1,59 +1,166 @@
-# FenixFrontend
+# 🛍️ Fenix Frontend — E-Commerce Platform
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.3.
+**FenixFrontend** es un frontend moderno de comercio electrónico construido con **Angular 21**, **PrimeNG** y **TailwindCSS**. Ofrece una experiencia de usuario completa con autenticación JWT, catálogo de productos, carrito de compras, procesamiento de pagos y panel administrativo.
 
-## Development server
+---
 
-To start a local development server, run:
+## ✨ Características
+
+| Módulo | Funcionalidad |
+|--------|---------------|
+| 🔐 **Autenticación** | Login, registro, JWT, guardias de ruta por rol (ADMIN / CUSTOMER) |
+| 🏠 **Home** | Landing page con categorías, productos recomendados y más vendidos |
+| 📦 **Productos** | Listado, detalle, búsqueda con debounce, filtros por categoría y paginación |
+| 🛒 **Carrito** | Carrito de compras persistente en localStorage con badge en header |
+| 📋 **Órdenes** | Creación de órdenes con líneas de producto dinámicas e historial |
+| 💳 **Pagos** | Selección de método, procesamiento simulado y resultado |
+| 👑 **Admin** | Dashboard con gráficos, CRUD de productos con API real, categorías, usuarios |
+| 👤 **Perfil** | Perfil de usuario autenticado |
+| 📬 **Contacto** | Formulario de contacto con servicio HTTP, validaciones y notificaciones Toast |
+| 🔔 **Notificaciones** | Sistema de notificaciones Toast y ConfirmDialog para feedback de usuario |
+
+---
+
+## 🖥️ Stack Tecnológico
+
+| Tecnología | Versión |
+|------------|---------|
+| [Angular](https://angular.dev) | 21 |
+| [PrimeNG](https://primeng.org) | 21 |
+| [PrimeFlex](https://primeflex.org) | 4 |
+| [PrimeIcons](https://primeng.org/icons) | 7 |
+| [TailwindCSS](https://tailwindcss.com) | 4 |
+| [SweetAlert2](https://sweetalert2.github.io) | 11 |
+| [Chart.js](https://www.chartjs.org) | Dashboard |
+| [TypeScript](https://www.typescriptlang.org) | 5.9 |
+| [Vitest](https://vitest.dev) | 4 |
+| [RxJS](https://rxjs.dev) | 7.8 |
+
+---
+
+## 🗂️ Estructura del Proyecto
+
+```
+src/app/
+├── core/                  # Layout (header, footer)
+├── features/              # Módulos de negocio
+│   ├── auth/              # Login, register, profile
+│   ├── home/              # Landing page
+│   ├── products/          # Listado, detalle, creación
+│   ├── orders/            # Creación e historial de órdenes
+│   ├── payment/           # Flujo de pago
+│   ├── shopping-card/     # Carrito de compras
+│   ├── admin/             # Panel administrativo
+│   ├── contact/           # Formulario de contacto
+│   └── about/             # Página "Sobre Nosotros"
+├── service/               # Servicios HTTP (auth, product, order, etc.)
+├── model/ & dto/          # Interfaces de dominio y DTOs
+├── guards/                # authGuard, rolGuard
+├── interceptors/          # Interceptor JWT + manejo de errores
+├── shared/                # Directivas, pipes, página 403
+└── primeng/               # Barrel de imports PrimeNG
+```
+
+---
+
+## 🚀 Inicio Rápido
 
 ```bash
+# 1. Clonar el repositorio
+git clone <repo-url>
+cd fenix-frontend
+
+# 2. Instalar dependencias
+npm install
+
+# 3. Iniciar servidor de desarrollo
 ng serve
+
+# 4. Abrir en el navegador
+open http://localhost:4200
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+> ⚠️ El backend API debe ejecutarse en `http://localhost:3000`.  
+> Ver configuración en `src/app/environments/enviroment.ts`.
 
-## Code scaffolding
+---
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+## 📦 Build para Producción
 
 ```bash
 ng build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Los artefactos se generan en `dist/fenix-frontend/`.
 
-## Running unit tests
+---
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+## 🧪 Tests
 
 ```bash
 ng test
 ```
 
-## Running end-to-end tests
+Ejecuta pruebas unitarias con Vitest.
 
-For end-to-end (e2e) testing, run:
+---
 
-```bash
-ng e2e
-```
+## 🧭 Rutas Principales
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+| Ruta | Descripción | Acceso |
+|------|-------------|--------|
+| `/` | Home / Landing | Público |
+| `/login` | Inicio de sesión | Público |
+| `/register` | Registro | Público |
+| `/products` | Catálogo de productos | Autenticado |
+| `/products/:id` | Detalle de producto | Autenticado |
+| `/products/create` | Crear producto | Autenticado |
+| `/shopping-cart` | Carrito de compras | Autenticado |
+| `/orders/create` | Nueva orden | CUSTOMER / ADMIN |
+| `/orders/history` | Historial de órdenes | CUSTOMER / ADMIN |
+| `/payment/*` | Flujo de pago | CUSTOMER / ADMIN |
+| `/auth/profile` | Perfil de usuario | CUSTOMER |
+| `/admin/dashboard` | Panel admin | ADMIN |
+| `/About` | Acerca de | Público |
+| `/Contact` | Contacto | Público |
 
-## Additional Resources
+---
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## 🔐 Flujo de Autenticación
+
+1. El usuario se registra (`/register`) o inicia sesión (`/login`)
+2. El backend devuelve un **JWT** que se almacena en `localStorage`
+3. Un **interceptor HTTP** adjunta el token a todas las solicitudes (excepto endpoints públicos)
+4. Los **guardias de ruta** (`authGuard`, `rolGuard`) protegen las rutas según el rol
+5. En caso de 401 → redirección a `/login`; 403 → SweetAlert + redirección
+
+---
+
+## 👤 Roles
+
+- **CUSTOMER** — Acceso a productos, órdenes, carrito, perfil
+- **ADMIN** — Acceso completo al panel de administración
+
+---
+
+## 🆕 Funcionalidades Agregadas Recientemente
+
+| Funcionalidad | Descripción |
+|---------------|-------------|
+| 🔍 **Búsqueda con debounce** | Búsqueda en tiempo real con 300ms de retardo para evitar llamadas excesivas |
+| 🏷️ **Filtro por categoría** | Selector de categorías con filtrado instantáneo del catálogo |
+| 📄 **Paginación** | Navegación por páginas en productos y tablas del panel admin |
+| 🛒 **Badge de carrito** | Contador de artículos visible en el header |
+| 🔔 **Toast Notifications** | Feedback visual con PrimeNG Toast para acciones del usuario |
+| ✅ **Confirmación de eliminación** | Diálogo de confirmación con ConfirmDialog para evitar borrados accidentales |
+| 📬 **Servicio de contacto** | Formulario de contacto conectado a backend con validaciones |
+| 🚪 **Logout funcional** | Limpieza completa de sesión al cerrar sesión |
+| 🔄 **Footer dinámico** | Año actualizado automáticamente y enlaces corregidos |
+| ⏳ **Loading states** | Indicadores de carga en componentes con operaciones asíncronas |
+| 👑 **Admin CRUD real** | Panel admin conectado a API real para crear, editar y eliminar productos |
+
+---
+
+## 📄 Licencia
+
+Este proyecto es de uso educativo y portafolio personal.

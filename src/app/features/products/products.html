@@ -1,70 +1,95 @@
-<h1>Products</h1>
-  
- <div class="categories">
-  <p-card
-    *ngFor="let cat of categories"
-    class="category-card"
-    (click)="goToCategory(cat.categoryid)"
-  >
-    <i class="pi {{ cat.icon }} icon"></i>
-    <h3>{{ cat.categoryname }}</h3>
-  </p-card>
-</div>
-<div *ngIf="productos.length > 0" class="grid">
-  <div
-    class="col-12 sm:col-6 md:col-4 lg:col-3"
-    *ngFor="let product of productos"
-  >
-    <div class="border border-surface rounded-border p-4 h-full">
-
-      <!-- Imagen -->
-      <div class="mb-4">
-        <div class="relative mx-auto">
-          <img
-            src="../../../assets/img/products/imagendefault.png"
-            (error)="onImageError($event)"
-            [alt]="product.productname"
-            class="w-full rounded-border"
-          />
-
-          <!-- Estado -->
-          <p-tag
-            [value]="getInventoryLabel(product.productquantity)"
-            [severity]="getSeverity(product.productquantity)"
-            class="absolute"
-            [ngStyle]="{ 'left.px': 5, 'top.px': 5 }"
-          />
-        </div>
-      </div>
-
-      <!-- Nombre -->
-      <div class="mb-4 font-medium">
-        {{ product.productname }}
-      </div>
-
-      <!-- Precio + acciones -->
-      <div class="flex justify-between items-center mt-auto">
-        <div class="font-semibold text-xl">
-          ${{ product.productprice }}
-        </div>
-
-        <span>
-          <p-button
-            icon="pi pi-heart"
-            severity="secondary"
-            [outlined]="true"
-          />
-          <p-button
-            icon="pi pi-shopping-cart"
-            styleClass="ml-2"
-          />
-        </span>
-      </div>
-
+<div class="p-4">
+  <div class="flex flex-wrap justify-content-between align-items-center mb-3 gap-2">
+    <h1 class="text-3xl font-bold m-0">Productos</h1>
+    <div class="flex gap-2 flex-wrap">
+      <span class="p-input-icon-left">
+        <i class="pi pi-search"></i>
+        <input
+          pInputText
+          type="text"
+          (input)="onSearchInput($any($event.target).value)"
+          placeholder="Buscar productos..."
+          class="p-inputtext-sm"
+        />
+      </span>
+      <p-select
+        [options]="categories"
+        [(ngModel)]="selectedCategory"
+        (onChange)="onCategoryChange()"
+        optionLabel="categoryname"
+        optionValue="categoryid"
+        placeholder="Filtrar por categoría"
+        styleClass="p-inputtext-sm"
+      ></p-select>
     </div>
   </div>
-</div>
 
-<div *ngIf="productos.length === 0">
-  <p>No hay productos disponibles</p>
+  <div class="categories mb-4">
+    <p-card
+      *ngFor="let cat of categories"
+      class="category-card"
+      (click)="goToCategory(cat.categoryid!)"
+      [ngClass]="{'selected-category': selectedCategory === cat.categoryid}"
+    >
+      <i class="pi {{ cat.icon }} icon"></i>
+      <h3>{{ cat.categoryname }}</h3>
+    </p-card>
+  </div>
+
+  <p-progressSpinner *ngIf="loading" class="flex justify-content-center my-4"></p-progressSpinner>
+
+  <div *ngIf="!loading && filteredProducts.length > 0" class="grid">
+    <div
+      class="col-12 sm:col-6 md:col-4 lg:col-3"
+      *ngFor="let product of filteredProducts | slice: first : first + rows"
+    >
+      <div class="border border-surface rounded-border p-4 h-full flex flex-column">
+        <div class="mb-4">
+          <div class="relative mx-auto">
+            <img
+              src="../../../assets/img/products/imagendefault.png"
+              (error)="onImageError($event)"
+              [alt]="product.productname"
+              class="w-full rounded-border"
+            />
+            <p-tag
+              [value]="getInventoryLabel(product.productquantity)"
+              [severity]="getSeverity(product.productquantity)"
+              class="absolute"
+              [ngStyle]="{ 'left.px': 5, 'top.px': 5 }"
+            />
+          </div>
+        </div>
+
+        <div class="mb-4 font-medium">
+          {{ product.productname }}
+        </div>
+
+        <div class="flex justify-between items-center mt-auto">
+          <div class="font-semibold text-xl">
+            ${{ product.productprice }}
+          </div>
+          <span>
+            <p-button icon="pi pi-heart" severity="secondary" [outlined]="true" />
+            <p-button icon="pi pi-shopping-cart" styleClass="ml-2" />
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!loading && filteredProducts.length > 0" class="flex justify-content-center mt-3">
+    <p-paginator
+      [first]="first"
+      [rows]="rows"
+      [totalRecords]="filteredProducts.length"
+      [rowsPerPageOptions]="[8, 12, 20]"
+      (onPageChange)="onPageChange($event)"
+    ></p-paginator>
+  </div>
+
+  <div *ngIf="!loading && filteredProducts.length === 0" class="text-center p-4">
+    <i class="pi pi-search text-4xl text-color-secondary block mb-2"></i>
+    <p class="text-color-secondary">No se encontraron productos</p>
+  </div>
 </div>

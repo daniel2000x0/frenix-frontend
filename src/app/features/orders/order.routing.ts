@@ -22,6 +22,12 @@ export const ORDERS_ROUTES: Routes = [
             .then(c => c.CreateOrder)
       },
       {
+        path: 'history',
+        loadComponent: () =>
+          import('./history-order/history-order')
+            .then(c => c.HistoryOrder)
+      },
+      {
         path: '**',
         redirectTo: 'create'
       }

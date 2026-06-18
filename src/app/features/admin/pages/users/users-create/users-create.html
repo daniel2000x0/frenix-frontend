@@ -1,1 +1,57 @@
-<p>users-create works!</p>
+<div class="p-4">
+  <div class="flex align-items-center mb-4">
+    <button pButton icon="pi pi-arrow-left" class="p-button-text mr-2" (click)="cancel()"></button>
+    <h1 class="text-3xl font-bold m-0">Nuevo Usuario</h1>
+  </div>
+
+  <p-card>
+    <form [formGroup]="userForm" (ngSubmit)="save()" autocomplete="off" novalidate>
+      <div class="grid">
+        <div class="col-12 md:col-6 field">
+          <label for="userfirstname">Nombre</label>
+          <input id="userfirstname" type="text" pInputText formControlName="userfirstname" class="w-full" />
+          <small class="error" *ngIf="userForm.get('userfirstname')?.touched && userForm.get('userfirstname')?.invalid">
+            Nombre requerido (máx. 20 caracteres)
+          </small>
+        </div>
+
+        <div class="col-12 md:col-6 field">
+          <label for="userlastname">Apellido</label>
+          <input id="userlastname" type="text" pInputText formControlName="userlastname" class="w-full" />
+          <small class="error" *ngIf="userForm.get('userlastname')?.touched && userForm.get('userlastname')?.invalid">
+            Apellido requerido (máx. 20 caracteres)
+          </small>
+        </div>
+
+        <div class="col-12 md:col-6 field">
+          <label for="useremail">Email</label>
+          <input id="useremail" type="email" pInputText formControlName="useremail" class="w-full" />
+          <small class="error" *ngIf="userForm.get('useremail')?.touched && userForm.get('useremail')?.invalid">
+            Email inválido
+          </small>
+        </div>
+
+        <div class="col-12 md:col-6 field">
+          <label for="userpassword">Contraseña</label>
+          <p-password inputId="userpassword" formControlName="userpassword" [toggleMask]="true" [feedback]="false" styleClass="w-full"></p-password>
+          <small class="error" *ngIf="userForm.get('userpassword')?.touched && userForm.get('userpassword')?.invalid">
+            Mínimo 8 caracteres
+          </small>
+        </div>
+
+        <div class="col-12 md:col-6 field">
+          <label for="usergender">Género</label>
+          <p-select formControlName="usergender" [options]="genders" optionLabel="label" optionValue="value" placeholder="Selecciona género" class="w-full"></p-select>
+          <small class="error" *ngIf="userForm.get('usergender')?.touched && userForm.get('usergender')?.invalid">
+            Selecciona un género
+          </small>
+        </div>
+      </div>
+
+      <div class="flex gap-2 mt-3">
+        <button pButton type="button" label="Cancelar" icon="pi pi-times" class="p-button-text" (click)="cancel()"></button>
+        <button pButton type="submit" label="Guardar" icon="pi pi-check" [loading]="loading" [disabled]="userForm.invalid"></button>
+      </div>
+    </form>
+  </p-card>
+</div>

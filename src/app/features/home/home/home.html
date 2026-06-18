@@ -36,7 +36,7 @@
         <div class="mb-4">
           <div class="relative mx-auto">
             <img
-              [src]="product.imagenes?.[0]?.url || 'assets/img/products/imagendefault.png'"
+              [src]="(product.imagenes[0]?.url) || 'assets/img/products/imagendefault.png'"
               (error)="onImageError($event)"
               [alt]="product.productname"
               class="w-full rounded-border"
@@ -86,7 +86,7 @@
   </ng-template>
 </p-carousel>
 
-// lista 
+<!-- lista productos -->
 <div
   class="product-grid"
   *ngIf="productospublic().length > 0"
@@ -100,7 +100,7 @@
       <!-- Imagen -->
       <div class="image-wrapper">
         <img
-          [src]="product.imagenes?.[0]?.url || 'assets/img/products/imagendefault.png'"
+          [src]="(product.imagenes[0]?.url) || 'assets/img/products/imagendefault.png'"
           (error)="onImageError($event)"
           [alt]="product.productname"
         />

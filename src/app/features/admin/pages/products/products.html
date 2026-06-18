@@ -1,1 +1,93 @@
-<p>products works!</p>
+<div class="p-4">
+  <p-toast></p-toast>
+  <p-confirmDialog></p-confirmDialog>
+
+  <div class="flex justify-content-between align-items-center mb-3">
+    <h1 class="text-3xl font-bold m-0">Productos</h1>
+    <button pButton label="Nuevo" icon="pi pi-plus" (click)="openNew()"></button>
+  </div>
+
+  <p-card>
+    <p-table [value]="products" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5, 10, 20]" styleClass="p-datatable-sm">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>SKU</th>
+          <th>Nombre</th>
+          <th>Precio</th>
+          <th>Descuento</th>
+          <th>Cantidad</th>
+          <th>Categoría</th>
+          <th style="width: 120px">Acciones</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-product>
+        <tr>
+          <td>{{ product.productsku }}</td>
+          <td>{{ product.productname }}</td>
+          <td>{{ product.productprice | currency }}</td>
+          <td>{{ product.productdiscount }}%</td>
+          <td>{{ product.productquantity }}</td>
+          <td>{{ product.productcategory }}</td>
+          <td>
+            <button pButton icon="pi pi-pencil" class="p-button-rounded p-button-text" (click)="editProduct(product)"></button>
+            <button pButton icon="pi pi-trash" class="p-button-rounded p-button-text p-button-danger" (click)="deleteProduct(product)"></button>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="7" class="text-center">No hay productos registrados</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </p-card>
+
+  <p-dialog [(visible)]="productDialog" [style]="{ width: '500px' }" [header]="editMode ? 'Editar Producto' : 'Nuevo Producto'" [modal]="true" (onHide)="hideDialog()">
+    <div class="flex flex-column gap-3">
+      <div class="field">
+        <label for="productsku">SKU</label>
+        <input id="productsku" pInputText [(ngModel)]="selectedProduct.productsku" class="w-full" />
+      </div>
+      <div class="field">
+        <label for="productname">Nombre</label>
+        <input id="productname" pInputText [(ngModel)]="selectedProduct.productname" class="w-full" />
+      </div>
+      <div class="grid">
+        <div class="col-6 field">
+          <label for="productprice">Precio</label>
+          <p-inputNumber id="productprice" [(ngModel)]="selectedProduct.productprice" [min]="0" class="w-full" />
+        </div>
+        <div class="col-6 field">
+          <label for="productdiscount">Descuento (%)</label>
+          <p-inputNumber id="productdiscount" [(ngModel)]="selectedProduct.productdiscount" [min]="0" [max]="100" class="w-full" />
+        </div>
+      </div>
+      <div class="grid">
+        <div class="col-6 field">
+          <label for="productquantity">Cantidad</label>
+          <p-inputNumber id="productquantity" [(ngModel)]="selectedProduct.productquantity" [min]="0" class="w-full" />
+        </div>
+        <div class="col-6 field">
+          <label for="productcategory">Categoría</label>
+          <p-select
+            id="productcategory"
+            [(ngModel)]="selectedProduct.productcategory"
+            [options]="categoryOptions"
+            optionLabel="name"
+            optionValue="id"
+            placeholder="Seleccionar categoría"
+            class="w-full"
+          ></p-select>
+        </div>
+      </div>
+      <div class="field">
+        <label for="productdescription">Descripción</label>
+        <textarea id="productdescription" pInputText [(ngModel)]="selectedProduct.productdescription" class="w-full" rows="3"></textarea>
+      </div>
+    </div>
+    <ng-template pTemplate="footer">
+      <button pButton label="Cancelar" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+      <button pButton label="Guardar" icon="pi pi-check" (click)="saveProduct()"></button>
+    </ng-template>
+  </p-dialog>
+</div>

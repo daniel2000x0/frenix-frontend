@@ -1,1 +1,49 @@
-<p>dashboard works!</p>
+<div class="p-4">
+  <h1 class="text-3xl font-bold mb-4">Dashboard</h1>
+
+  <div class="grid">
+    <div class="col-12 md:col-6 lg:col-3">
+      <p-card header="Productos" subheader="Total">
+        <div class="flex align-items-center gap-2">
+          <i class="pi pi-box text-4xl text-primary"></i>
+          <span class="text-3xl font-bold">{{ totalProducts }}</span>
+        </div>
+      </p-card>
+    </div>
+
+    <div class="col-12 md:col-6 lg:col-3">
+      <p-card header="Usuarios" subheader="Registrados">
+        <div class="flex align-items-center gap-2">
+          <i class="pi pi-users text-4xl text-primary"></i>
+          <span class="text-3xl font-bold">{{ totalUsers }}</span>
+        </div>
+      </p-card>
+    </div>
+
+    <div class="col-12 md:col-6 lg:col-3">
+      <p-card header="Órdenes" subheader="Realizadas">
+        <div class="flex align-items-center gap-2">
+          <i class="pi pi-shopping-cart text-4xl text-primary"></i>
+          <span class="text-3xl font-bold">{{ totalOrders }}</span>
+        </div>
+      </p-card>
+    </div>
+
+    <div class="col-12 md:col-6 lg:col-3">
+      <p-card header="Ingresos" subheader="Totales">
+        <div class="flex align-items-center gap-2">
+          <i class="pi pi-dollar text-4xl text-primary"></i>
+          <span class="text-3xl font-bold">{{ totalRevenue | currency }}</span>
+        </div>
+      </p-card>
+    </div>
+  </div>
+
+  <div class="mt-4">
+    <p-card header="Ventas Mensuales">
+      <div style="height: 300px">
+        <p-chart type="line" [data]="chartData" [options]="chartOptions"></p-chart>
+      </div>
+    </p-card>
+  </div>
+</div>

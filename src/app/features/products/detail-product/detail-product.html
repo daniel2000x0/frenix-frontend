@@ -1,1 +1,45 @@
-<p>detail-product works!</p>
+<div class="p-4" *ngIf="product">
+  <p-card header="{{ product.productname }}">
+    <div class="grid">
+      <div class="col-12 md:col-6">
+        <div class="mb-3">
+          <label class="font-bold">SKU</label>
+          <p>{{ product.productsku }}</p>
+        </div>
+        <div class="mb-3">
+          <label class="font-bold">Precio</label>
+          <p>${{ product.productprice }}</p>
+        </div>
+        <div class="mb-3">
+          <label class="font-bold">Cantidad</label>
+          <p>
+            <p-tag
+              [value]="getInventoryLabel(product.productquantity)"
+              [severity]="getSeverity(product.productquantity)"
+            />
+            {{ product.productquantity }}
+          </p>
+        </div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="mb-3">
+          <label class="font-bold">Categoría</label>
+          <p>{{ product.productcategory }}</p>
+        </div>
+        <div class="mb-3">
+          <label class="font-bold">Fabricante</label>
+          <p>{{ product.productmanufacture }}</p>
+        </div>
+        <div class="mb-3">
+          <label class="font-bold">Descripción</label>
+          <p>{{ product.productdescription }}</p>
+        </div>
+      </div>
+    </div>
+    <ng-template pTemplate="footer">
+      <div class="flex justify-content-start">
+        <p-button label="Volver" icon="pi pi-arrow-left" (onClick)="goBack()"></p-button>
+      </div>
+    </ng-template>
+  </p-card>
+</div>

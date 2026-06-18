@@ -1,1 +1,22 @@
-<p>payment-result works!</p>
+<div class="p-4 flex justify-content-center">
+  <p-card styleClass="w-full md:w-6">
+    <ng-template pTemplate="header">
+      <div class="text-center py-3">
+        <i [class]="success ? 'pi pi-check-circle text-green-500' : 'pi pi-times-circle text-red-500'" style="font-size: 4rem"></i>
+      </div>
+    </ng-template>
+    <div class="flex flex-column align-items-center gap-3">
+      <h2>{{ success ? 'Pago Exitoso' : 'Pago Fallido' }}</h2>
+      <p-tag
+        [value]="success ? 'COMPLETADO' : 'RECHAZADO'"
+        [severity]="success ? 'success' : 'danger'"
+        styleClass="text-lg"
+      />
+      <p>Método: {{ method }}</p>
+      <div class="flex gap-2 mt-3">
+        <p-button *ngIf="!success" label="Reintentar" icon="pi pi-refresh" (onClick)="retry()"></p-button>
+        <p-button label="Ir al Inicio" icon="pi pi-home" (onClick)="goHome()"></p-button>
+      </div>
+    </div>
+  </p-card>
+</div>

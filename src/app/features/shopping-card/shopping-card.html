@@ -1,1 +1,65 @@
-<p>shopping-card works!</p>
+<div class="p-4">
+  <p-card header="Carrito de Compras">
+    <div class="flex justify-content-between align-items-center mb-3">
+      <span class="text-lg font-semibold">{{ cartItems.length }} {{ cartItems.length === 1 ? 'artículo' : 'artículos' }}</span>
+      <div class="flex gap-2">
+        <p-button label="Vaciar Carrito" icon="pi pi-trash" severity="danger" [outlined]="true" (onClick)="clearCart()" *ngIf="cartItems.length > 0"></p-button>
+      </div>
+    </div>
+
+    <p-table
+      [value]="cartItems"
+      [tableStyle]="{ 'min-width': '40rem' }"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Producto</th>
+          <th>Precio Unit.</th>
+          <th>Cantidad</th>
+          <th>Subtotal</th>
+          <th>Acción</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-item let-i="rowIndex">
+        <tr>
+          <td>
+            <div class="flex align-items-center gap-2">
+              <span class="font-medium">{{ item.product.productname }}</span>
+            </div>
+          </td>
+          <td>${{ item.product.productprice | number:'1.2-2' }}</td>
+          <td style="width: 120px">
+            <p-inputNumber
+              [(ngModel)]="item.quantity"
+              [min]="0"
+              [showButtons]="true"
+              [inputStyle]="{ width: '80px' }"
+              (onInput)="updateQuantity()"
+            />
+          </td>
+          <td class="font-bold">${{ (item.product.productprice * item.quantity) | number:'1.2-2' }}</td>
+          <td>
+            <p-button icon="pi pi-trash" severity="danger" [outlined]="true" (onClick)="removeFromCart(item.product.productid)"></p-button>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="summary">
+        <div class="flex justify-content-between align-items-center">
+          <span class="text-xl font-bold">Total: ${{ getTotal() | number:'1.2-2' }}</span>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="5" class="text-center py-4">
+            <i class="pi pi-shopping-cart text-4xl text-color-secondary block mb-2"></i>
+            <p class="text-color-secondary">El carrito está vacío</p>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+
+    <div class="flex justify-content-end mt-3" *ngIf="cartItems.length > 0">
+      <p-button label="Proceder al Pago" icon="pi pi-arrow-right" iconPos="right" (onClick)="checkout()"></p-button>
+    </div>
+  </p-card>
+</div>

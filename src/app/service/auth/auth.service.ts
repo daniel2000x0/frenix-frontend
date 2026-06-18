@@ -83,9 +83,8 @@ private getCurrentCustomerFromStorage(): Customer | null {
 }
 
 getPayload(): any | null {
-    const token = enviroment.auth.token;
+    const token = localStorage.getItem(enviroment.auth.token);
     if (!token) return null;
-// warning
 try {
     const base64Url = token.split('.')[1];
     const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');

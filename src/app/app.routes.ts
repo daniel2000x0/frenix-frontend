@@ -57,10 +57,27 @@ export const routes: Routes = [
     .then(c => c.Contact)
   },
   {
-    path:'About',
-    loadComponent:()=>
-       import('./features/about/about')
-    .then(c=>c.About)
+     path:'About',
+     loadComponent:()=>
+        import('./features/about/about')
+     .then(c=>c.About)
+   },
+   {
+    path: 'admin',
+    loadChildren: () =>
+      import('./features/admin/admin.routing')
+        .then(r => r.ADMIN_ROUTES)
+  },
+  {
+    path: 'orders',
+    loadChildren: () =>
+      import('./features/orders/order.routing')
+        .then(r => r.ORDERS_ROUTES)
+  },
+  {
+    path: 'payment',
+    loadChildren: () =>
+      import('./features/payment/payment.routes')
+        .then(r => r.PAYMENT_ROUTES)
   }
-  
 ];

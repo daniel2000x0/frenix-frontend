@@ -1,1 +1,47 @@
-<p>history-order works!</p>
+<div class="p-4">
+  <p-card header="Historial de Órdenes">
+    <div class="flex justify-content-end mb-3">
+      <p-button label="Nueva Orden" icon="pi pi-plus" (onClick)="createOrder()"></p-button>
+    </div>
+
+    <p-table
+      [value]="orders"
+      [paginator]="true"
+      [rows]="10"
+      [tableStyle]="{ 'min-width': '60rem' }"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th>ID</th>
+          <th>Fecha</th>
+          <th>Cliente</th>
+          <th>Total</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-order>
+        <tr>
+          <td>{{ order.orderid }}</td>
+          <td>{{ order.orderdate | date:'short' }}</td>
+          <td>{{ order.customername }}</td>
+          <td>${{ order.total_general | number:'1.2-2' }}</td>
+          <td>
+            <p-tag
+              [value]="order.status || 'PENDING'"
+              [severity]="getStatusSeverity(order.status)"
+            />
+          </td>
+          <td>
+            <p-button icon="pi pi-eye" severity="info" [outlined]="true" (onClick)="viewOrder(order.orderid)"></p-button>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="6" class="text-center">No hay órdenes registradas</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </p-card>
+</div>

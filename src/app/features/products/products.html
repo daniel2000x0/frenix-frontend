@@ -21,6 +21,15 @@
         placeholder="Filtrar por categoría"
         styleClass="p-inputtext-sm"
       ></p-select>
+      <p-select
+        [options]="sortOptions"
+        [(ngModel)]="selectedSort"
+        (onChange)="onSortChange()"
+        optionLabel="label"
+        optionValue="value"
+        placeholder="Ordenar por"
+        styleClass="p-inputtext-sm"
+      ></p-select>
     </div>
   </div>
 

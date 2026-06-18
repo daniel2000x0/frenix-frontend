@@ -31,8 +31,16 @@ export class Products implements OnInit {
   loading = false;
   searchTerm = '';
   selectedCategory: number | null = null;
+  selectedSort = 'name-asc';
   first = 0;
   rows = 8;
+
+  sortOptions = [
+    { label: 'Nombre A-Z', value: 'name-asc' },
+    { label: 'Nombre Z-A', value: 'name-desc' },
+    { label: 'Precio: menor a mayor', value: 'price-asc' },
+    { label: 'Precio: mayor a menor', value: 'price-desc' },
+  ];
 
   private searchSubject = new Subject<string>();
 
@@ -96,6 +104,11 @@ export class Products implements OnInit {
     this.applyFilters();
   }
 
+  onSortChange() {
+    this.first = 0;
+    this.applyFilters();
+  }
+
   applyFilters() {
     let result = [...this.productos];
 
@@ -111,6 +124,19 @@ export class Products implements OnInit {
         p.productdescription?.toLowerCase().includes(term)
       );
     }
+
+    result.sort((a, b) => {
+      switch (this.selectedSort) {
+        case 'name-desc':
+          return b.productname.localeCompare(a.productname);
+        case 'price-asc':
+          return a.productprice - b.productprice;
+        case 'price-desc':
+          return b.productprice - a.productprice;
+        default:
+          return a.productname.localeCompare(b.productname);
+      }
+    });
 
     this.filteredProducts = result;
   }
